@@ -6,6 +6,11 @@ FROM python:3.9.1
 # Command to run upon build
 RUN pip install pandas
 
+# Copy file from current working directory docker directory
+# First create a /app directory then cd into it 
+WORKDIR /app
+COPY pipeline.py pipeline.py
+
 # Setting landing point
 ENTRYPOINT ["bash"]
 
