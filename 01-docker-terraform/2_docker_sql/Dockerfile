@@ -14,10 +14,10 @@ COPY ingest_data.py ingest_data.py
 
 # Setting landing point
 # Loads a bash interactive terminal upon running the image
-ENTRYPOINT ["bash"]
+# ENTRYPOINT ["bash"]
 
 # Runs the pyton scripts upon running the image
-# ENTRYPOINT [ "python", "ingest_data.py" ]
+ENTRYPOINT [ "python", "ingest_data.py" ]
 
 # To build this image use this command [docker build -t <image:name> .]
 # To run image use this command [docker run -it my_image:01]
