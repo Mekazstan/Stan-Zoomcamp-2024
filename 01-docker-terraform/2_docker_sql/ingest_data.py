@@ -107,9 +107,9 @@ def main():
 
     engine = create_engine(f'postgresql://{user}:{password}@{container_id_or_name}:{port}/{db}')
     print("Connection Successfull...")
-    exit()
 
     df_iter = pd.read_csv(csv_name, iterator=True, chunksize=100000)
+    print("Found the csv...")
 
     df = next(df_iter)
 
