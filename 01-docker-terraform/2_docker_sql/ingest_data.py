@@ -94,6 +94,8 @@ def main(params):
     csv_name = 'yellow_tripdata_2021-01.csv'
 
     engine = create_engine(f'postgresql://{user}:{password}@{container_id_or_name}:{port}/{db}')
+    print("Connection Successfull...")
+    exit()
 
     df_iter = pd.read_csv(csv_name, iterator=True, chunksize=100000)
 
