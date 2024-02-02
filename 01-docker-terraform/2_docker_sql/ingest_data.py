@@ -6,33 +6,28 @@ from time import time
 import pandas as pd
 from sqlalchemy import create_engine
 
-def main():
+
+def main(params):
+    user = params.user
+    password = params.password
+    host = params.host 
+    port = params.port 
+    db = params.db
+    table_name = params.table_name
+    # url = params.url
     
-    parser = argparse.ArgumentParser(description='Ingest CSV data to Postgres')
+    # if url.endswith('.csv.gz'):
+    #     csv_name = 'output.csv.gz'
+    # else:
+    #     csv_name = 'output.csv'
 
-    parser.add_argument('--user', required=True, help='user name for postgres')
-    parser.add_argument('--password', required=True, help='password for postgres')
-    parser.add_argument('--container_id_or_name', required=True, help='container ID or name for postgres')
-    parser.add_argument('--port', required=True, help='port for postgres')
-    parser.add_argument('--db', required=True, help='database name for postgres')
-    parser.add_argument('--table_name', required=True, help='name of the table where we will write the results to')
-
-    args = parser.parse_args()
+    # os.system(f"wget {url} -O {csv_name}")
     
-    user = args.user
-    password = args.password
-    container_id_or_name = args.container_id_or_name
-    port = args.port 
-    db = args.db
-    table_name = args.table_name
-
     csv_name = 'yellow_tripdata_2021-01.csv'
 
-    engine = create_engine(f'postgresql://{user}:{password}@{container_id_or_name}:{port}/{db}')
-    print("Connection Successfull...")
+    engine = create_engine(f'postgresql://{user}:{password}@{host}:{port}/{db}')
 
     df_iter = pd.read_csv(csv_name, iterator=True, chunksize=100000)
-    print("Found the csv...")
 
     df = next(df_iter)
 
@@ -43,9 +38,12 @@ def main():
 
     df.to_sql(name=table_name, con=engine, if_exists='append')
 
+
     while True: 
+
         try:
             t_start = time()
+            
             df = next(df_iter)
 
             df.tpep_pickup_datetime = pd.to_datetime(df.tpep_pickup_datetime)
@@ -62,7 +60,16 @@ def main():
             break
 
 if __name__ == '__main__':
-    main()
-    
-    
-# python3 ingest_data.py --user root --password root --container_id_or_name e66de0f0aa8c --port 5432 --db ny_taxi --table_name yellow_taxi_data
+    parser = argparse.ArgumentParser(description='Ingest CSV data to Postgres')
+
+    parser.add_argument('--user', required=True, help='user name for postgres')
+    parser.add_argument('--password', required=True, help='password for postgres')
+    parser.add_argument('--host', required=True, help='host for postgres')
+    parser.add_argument('--port', required=True, help='port for postgres')
+    parser.add_argument('--db', required=True, help='database name for postgres')
+    parser.add_argument('--table_name', required=True, help='name of the table where we will write the results to')
+    # parser.add_argument('--url', required=True, help='url of the csv file')
+
+    args = parser.parse_args()
+
+    main(args)
