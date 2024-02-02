@@ -5,7 +5,7 @@ FROM python:3.9.1
 
 # Command to run upon build
 RUN apt-get install wget
-RUN pip install pandas sqlalchemy psycopg2 requests
+RUN pip install pandas sqlalchemy psycopg2
 
 # Copy file from current working directory docker directory
 # First create a /app directory then cd into it 
