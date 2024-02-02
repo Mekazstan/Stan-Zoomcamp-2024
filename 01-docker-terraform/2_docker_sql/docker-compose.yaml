@@ -1,6 +1,8 @@
 services:
   pgdatabase:
+    container_name: postgres_container
     image: postgres:latest
+    restart: always
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
@@ -9,7 +11,9 @@ services:
       - "./ny_taxi_postgres_data:/var/lib/postgresql/data:rw"
       
   pgadmin:
+    container_name: pgadmin4_container
     image: dpage/pgadmin4
+    restart: always
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@admin.com
       - PGADMIN_DEFAULT_PASSWORD=root
