@@ -14,10 +14,10 @@ COPY injest_data1.py yellow_tripdata_2021-01.csv /app/
 
 # Setting landing point
 # Loads a bash interactive terminal upon running the image
-ENTRYPOINT ["bash"]
+# ENTRYPOINT ["bash"]
 
 # Runs the pyton scripts upon running the image
-# ENTRYPOINT [ "python", "ingest_data1.py" ]
+ENTRYPOINT [ "python", "injest_data1.py" ]
 
 # To build this image use this command [docker build -t my_image:01 .]
 # To run image use this command [docker run -it my_image:01]
