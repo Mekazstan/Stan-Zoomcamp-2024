@@ -10,54 +10,6 @@ docker run -it \
   postgres:13
 ```
 
-If you see that `ny_taxi_postgres_data` is empty after running
-the container, try these:
-
-* Deleting the folder and running Docker again (Docker will re-create the folder)
-* Adjust the permissions of the folder by running `sudo chmod a+rwx ny_taxi_postgres_data`
-
-
-### CLI for Postgres
-
-Installing `pgcli`
-
-```bash
-pip install pgcli
-```
-
-If you have problems installing `pgcli` with the command above, try this:
-
-```bash
-conda install -c conda-forge pgcli
-pip install -U mycli
-```
-
-Using `pgcli` to connect to Postgres
-
-```bash
-pgcli -h localhost -p 5432 -u root -d ny_taxi
-```
-
-
-### NY Trips Dataset
-
-Dataset:
-
-* https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page
-* https://www1.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf
-
-> According to the [TLC data website](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page),
-> from 05/13/2022, the data will be in ```.parquet``` format instead of ```.csv```
-> The website has provided a useful [link](https://www1.nyc.gov/assets/tlc/downloads/pdf/working_parquet_format.pdf) with sample steps to read ```.parquet``` file and convert it to Pandas data frame.
->
-> You can use the csv backup located here, https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2021-01.csv.gz, to follow along with the video.
-```
-$ aws s3 ls s3://nyc-tlc
-                           PRE csv_backup/
-                           PRE misc/
-                           PRE trip data/
-```
-
 ### pgAdmin
 
 Running pgAdmin
