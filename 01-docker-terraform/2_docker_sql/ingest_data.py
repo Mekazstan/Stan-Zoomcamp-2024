@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
 import os
 import argparse
 
@@ -19,8 +16,6 @@ def main(params):
     table_name = params.table_name
     url = params.url
     
-    # the backup files are gzipped, and it's important to keep the correct extension
-    # for pandas to be able to open the file
     if url.endswith('.csv.gz'):
         csv_name = 'output.csv.gz'
     else:
