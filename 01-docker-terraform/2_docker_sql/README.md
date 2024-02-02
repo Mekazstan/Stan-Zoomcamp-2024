@@ -9,7 +9,8 @@ docker run -it \
    postgres:13
 
 pgcli -h localhost -p 5432 -u root -d ny_taxi
-pgcli -h 0.0.0.0 -p 5432 -u root -d ny_taxi
+### Enabling Interaction with Postgres DB 
+docker exec -it e66de0f0aa8c psql -U root -d ny_taxi
 
 ## Running PGAdmin
 docker run -it \
