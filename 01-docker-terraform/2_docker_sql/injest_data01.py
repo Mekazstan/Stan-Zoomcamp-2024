@@ -64,5 +64,3 @@ def main():
 if __name__ == '__main__':
     main()
     
-    
-# python3 ingest_data.py --user root --password root --host e66de0f0aa8c --port 5432 --db ny_taxi --table_name yellow_taxi_data

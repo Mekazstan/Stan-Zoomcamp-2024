@@ -53,3 +53,6 @@ python injest-data.py
 
 ### Ip address verification for a container
 docker inspect <container_id>
+
+
+docker run -it --rm my_image:01 --user root --password root --host 172.18.0.3 --port 5432 --db ny_taxi --table_name yellow_taxi_data
