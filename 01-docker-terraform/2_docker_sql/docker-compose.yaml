@@ -7,9 +7,10 @@ services:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=ny_taxi
+      - POSTGRES_HOST_AUTH_METHOD=trust
     volumes:
       - "./ny_taxi_postgres_data:/var/lib/postgresql/data:rw"
-      
+
   pgadmin:
     container_name: pgadmin4_container
     image: dpage/pgadmin4

@@ -27,21 +27,24 @@ def main():
     table_name = args.table_name
 
     csv_name = 'yellow_tripdata_2021-01.csv'
-
+    print("Connecting to postgres..")
     engine = create_engine(f'postgresql://{user}:{password}@{host}:{port}/{db}')
-    print("Connection Successfull...")
+    conn = engine.connect()
+    print("Connection successfull...")
 
     df_iter = pd.read_csv(csv_name, iterator=True, chunksize=100000)
-    print("Found the csv...")
 
     df = next(df_iter)
 
+    print("1")
     df.tpep_pickup_datetime = pd.to_datetime(df.tpep_pickup_datetime)
     df.tpep_dropoff_datetime = pd.to_datetime(df.tpep_dropoff_datetime)
 
-    df.head(n=0).to_sql(name=table_name, con=engine, if_exists='replace')
+    df.head(n=0).to_sql(name=table_name, con=conn, if_exists='replace')
+    print("3")
 
-    df.to_sql(name=table_name, con=engine, if_exists='append')
+    df.to_sql(name=table_name, con=conn, if_exists='append')
+    print("4")
 
     while True: 
         try:
@@ -51,7 +54,7 @@ def main():
             df.tpep_pickup_datetime = pd.to_datetime(df.tpep_pickup_datetime)
             df.tpep_dropoff_datetime = pd.to_datetime(df.tpep_dropoff_datetime)
 
-            df.to_sql(name=table_name, con=engine, if_exists='append')
+            df.to_sql(name=table_name, con=conn, if_exists='append')
 
             t_end = time()
 
