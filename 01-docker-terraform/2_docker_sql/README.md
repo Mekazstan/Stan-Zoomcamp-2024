@@ -50,3 +50,6 @@ python injest-data.py
    --port=5432 \
    --db=ny_taxi \
    --table_name=yellow_taxi_data
+
+### Ip address verification for a container
+docker inspect <container_id>
