@@ -12,7 +12,7 @@ def main():
 
     parser.add_argument('--user', required=True, help='user name for postgres')
     parser.add_argument('--password', required=True, help='password for postgres')
-    parser.add_argument('--container_id_or_name', required=True, help='container ID or name for postgres')
+    parser.add_argument('--host', required=True, help='host for postgres')
     parser.add_argument('--port', required=True, help='port for postgres')
     parser.add_argument('--db', required=True, help='database name for postgres')
     parser.add_argument('--table_name', required=True, help='name of the table where we will write the results to')
@@ -21,14 +21,14 @@ def main():
     
     user = args.user
     password = args.password
-    container_id_or_name = args.container_id_or_name
+    host = args.host
     port = args.port 
     db = args.db
     table_name = args.table_name
 
     csv_name = 'yellow_tripdata_2021-01.csv'
 
-    engine = create_engine(f'postgresql://{user}:{password}@{container_id_or_name}:{port}/{db}')
+    engine = create_engine(f'postgresql://{user}:{password}@{host}:{port}/{db}')
     print("Connection Successfull...")
 
     df_iter = pd.read_csv(csv_name, iterator=True, chunksize=100000)
@@ -65,4 +65,4 @@ if __name__ == '__main__':
     main()
     
     
-# python3 ingest_data.py --user root --password root --container_id_or_name e66de0f0aa8c --port 5432 --db ny_taxi --table_name yellow_taxi_data
+# python3 ingest_data.py --user root --password root --host e66de0f0aa8c --port 5432 --db ny_taxi --table_name yellow_taxi_data
