@@ -10,7 +10,7 @@ RUN pip install pandas sqlalchemy psycopg2
 # Copy file from current working directory docker directory
 # First create a /app directory then cd into it 
 WORKDIR /app
-COPY ingest_data.py yellow_tripdata_2021-01.csv /app/ 
+COPY ingest_data2.py yellow_tripdata_2021-01.csv /app/ 
 
 # Setting landing point
 # Loads a bash interactive terminal upon running the image
