@@ -55,5 +55,4 @@ python injest-data.py
 docker inspect <container_id>
 
 
-docker run -it --rm my_image:01 --user root --password root --host 172.18.0.3 --port 5432 --db ny_taxi --table_name yellow_taxi_data
-python3 injest_data01.py --user root --password root --host 172.18.0.3 --port 9943 --db ny_taxi --table_name yellow_taxi_data
+docker run -it --network 2_docker_sql_default my_image:01  --user root --password root --host pgdatabase --port 5432 --db ny_taxi --table_name yellow_taxi_trips

@@ -10,6 +10,8 @@ services:
       - POSTGRES_HOST_AUTH_METHOD=trust
     volumes:
       - "./ny_taxi_postgres_data:/var/lib/postgresql/data:rw"
+    ports:
+      - "5431:5432"
 
   pgadmin:
     container_name: pgadmin4_container
