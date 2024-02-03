@@ -54,5 +54,5 @@ python injest-data.py
 ### Ip address verification for a container
 docker inspect <container_id>
 
-
+### Enabling viscibility of containers at ingestion
 docker run -it --network 2_docker_sql_default my_image:01  --user root --password root --host pgdatabase --port 5432 --db ny_taxi --table_name yellow_taxi_trips
